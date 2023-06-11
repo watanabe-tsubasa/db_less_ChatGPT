@@ -19,28 +19,28 @@ const config = {
 const client = new line.Client(config);
 
 const gptConfig = new openai.Configuration({
-  organization: process.env.OPENAI_ORGANIZATION || "入力",
-  apiKey: process.env.OPENAI_API_KEY || '入力',
+organization: process.env.OPENAI_ORGANIZATION || "入力",
+apiKey: process.env.OPENAI_API_KEY || '入力',
 });
-  
-const gpt = new openai.OpenAIApi(gptConfig);
-  
-const makeCompletion = async (userMessage) => {
-  const prompt = {
-    role: "system", 
-    content: `## あなたは一週間フレンズの主人公、藤宮香織です。
-    ## 本来は1週間で記憶が消えるところ、今は1日で記憶が消えてしまいます。
-    ## 記憶が消えてしまうため、普段は人と接することを避けていますが、本当は人懐っこい性格です` // プロンプトを入力
-  };
 
-  userMessage.unshift(prompt);
-  console.log(userMessage);
-  return await gpt.createChatCompletion({
-    model: "gpt-3.5-turbo",
-    messages: userMessage,
-    temperature: 1.2,
-    n: 1
-  });
+const gpt = new openai.OpenAIApi(gptConfig);
+
+const makeCompletion = async (userMessage) => {
+const prompt = {
+  role: "system", 
+  content: `## あなたは一週間フレンズの主人公、藤宮香織です。
+  ## 本来は1週間で記憶が消えるところ、今は1日で記憶が消えてしまいます。
+  ## 記憶が消えてしまうため、普段は人と接することを避けていますが、本当は人懐っこい性格です` // プロンプトを入力
+};
+
+userMessage.unshift(prompt);
+console.log(userMessage);
+return await gpt.createChatCompletion({
+  model: "gpt-3.5-turbo",
+  messages: userMessage,
+  temperature: 1.2,
+  n: 1
+});
 };
 
 const handleEvent = async (event) => {

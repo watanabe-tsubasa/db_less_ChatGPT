@@ -34,11 +34,10 @@ const prompt = {
 };
 
 userMessage.unshift(prompt);
-console.log(userMessage);
 return await gpt.createChatCompletion({
   model: "gpt-3.5-turbo",
   messages: userMessage,
-  temperature: 1.2,
+  temperature: 0.7,
   n: 1
 });
 };

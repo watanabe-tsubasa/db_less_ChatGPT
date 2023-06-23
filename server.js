@@ -74,7 +74,7 @@ const handleEvent = async (event) => {
           "content": obj.content
         };
       });
-      conversation.unshift(...log);
+      [...log].push(conversation);
     } catch (error) {
       console.error(error);
     };
